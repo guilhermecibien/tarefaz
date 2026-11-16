@@ -253,6 +253,13 @@ h1 { margin: 0; font-size: 2rem; }
 .estrela { margin-right: 5px; color: var(--prio-media); }
 .item .data { font-size: .85rem; color: var(--ink-soft); padding-top: 2px; }
 .atrasadas .data { color: var(--late); font-weight: 600; }
+.hoje .data { color: var(--prio-media); font-weight: 600; }
+.grupo.hoje h2 { color: var(--prio-media); }
+
+/* faixa lateral: reforça a urgência sem depender só da cor */
+.atrasadas .item, .hoje .item { padding-left: 10px; border-left: 3px solid; }
+.atrasadas .item { border-left-color: var(--late); }
+.hoje .item { border-left-color: var(--prio-media); }
 
 .item.feita .titulo { color: var(--ink-soft); text-decoration: line-through; }
 
