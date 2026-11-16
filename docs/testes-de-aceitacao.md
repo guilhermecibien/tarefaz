@@ -76,3 +76,21 @@ O avaliador não relatou problemas durante o uso das funcionalidades testadas.
 ### Funcionalidades não testadas
 
 Edição e exclusão de tarefas, checklist, busca, conclusão e reabertura de tarefas e alteração de dados da conta. O teste foi direcionado ao cadastro, criação de tarefa e tema escuro.
+
+
+## Avaliador 5
+
+**Nome:** Nicolas Andrade Silva  
+**Data do teste:** 16/11/2026
+
+### O que testou e funcionou
+
+O avaliador criou uma conta, cadastrou uma tarefa para organizar a mochila antes de sair e utilizou o checklist. Também testou a busca por tarefas, a troca de senha, logout e novo login. Relatou que a navegação foi direta e que todas as funcionalidades utilizadas funcionaram normalmente.
+
+### O que testou e não funcionou
+
+O avaliador não relatou problemas durante o uso do sistema.
+
+### Funcionalidades não testadas
+
+Edição e exclusão de tarefas, alteração de tema e alteração de nome ou e-mail da conta. O teste concentrou-se em autenticação, criação de tarefa, checklist e busca.
