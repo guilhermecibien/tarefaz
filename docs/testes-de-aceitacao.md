@@ -36,3 +36,25 @@ Não foi relatado nenhum problema nas funcionalidades utilizadas durante o teste
 ### Funcionalidades não testadas
 
 Checklist, busca, conclusão e reabertura de tarefas, alteração de tema e gerenciamento de conta. O teste foi direcionado à criação de uma tarefa de estudo e à navegação para edição.
+
+
+## Avaliador 3
+
+**Nome:** Cassia Nascimentos dos Santos  
+**Data do teste:** 16/11/2026
+
+### O que testou e funcionou
+
+A avaliadora criou uma tarefa para lembrar de agendar uma consulta e utilizou o campo de prazo. Relatou que essa funcionalidade ajuda em situações que poderiam ser esquecidas no dia a dia.
+
+### O que testou e não funcionou
+
+Não foi relatado erro durante o cadastro da tarefa e a definição do prazo.
+
+### Sugestão e melhoria aplicada
+
+A avaliadora sugeriu uma diferenciação visual para tarefas mais urgentes. Após o feedback, foram aplicadas cores leves para destacar as seções de tarefas de **hoje** e tarefas **atrasadas**, facilitando a identificação de prioridades.
+
+### Funcionalidades não testadas
+
+Checklist, busca, edição de tarefa, conclusão e reabertura, alteração de tema e gerenciamento de conta. O teste foi direcionado à criação de uma tarefa com prazo.
