@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Cadastro | Tarefaz{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <div class="brand brand-large">Tare<span>faz</span></div>
+  <h1>Crie sua conta</h1>
+  <form method="post" class="form">
+    <label>Nome
+      <input name="nome" required value="{{ request.form.get('nome', '') }}">
+    </label>
+    <label>E-mail
+      <input type="email" name="email" required value="{{ request.form.get('email', '') }}">
+    </label>
+    <label>Senha <small>(mínimo de 8 caracteres, com letras e números)</small>
+      <input type="password" name="senha" minlength="8" required>
+    </label>
+    <button class="button" type="submit">Cadastrar</button>
+  </form>
+  <p class="muted">Já possui uma conta? <a href="{{ url_for('auth.login') }}">Entrar</a></p>
+</section>
+{% endblock %}

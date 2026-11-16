@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Minhas tarefas | Tarefaz{% endblock %}
+
+{% macro item(t, sub) %}
+<li class="item{% if t.status == 'concluido' %} feita{% endif %}" id="t-{{ t.id }}">
+  <form method="post" action="{{ url_for('tasks.toggle', task_id=t.id) }}" class="check-form">
+    <input type="hidden" name="feita" value="{{ 0 if t.status == 'concluido' else 1 }}">
+    <input type="checkbox" aria-label="Concluir" {% if t.status == 'concluido' %}checked{% endif %}>
+    <noscript><button type="submit">ok</button></noscript>
+  </form>
+  <div class="titulo" data-url="{{ url_for('tasks.rename', task_id=t.id) }}">
+    {% if t.prioridade == 'alta' %}<span class="estrela" title="Importante">★</span>{% endif %}<span class="texto">{{ t.titulo }}</span>
+    {% if t.descricao %}<small>{{ t.descricao }}</small>{% endif %}
+  </div>
+  <button type="button" class="chk-toggle{% if not sub %} sem-itens{% endif %}" aria-expanded="false">
+    {% if sub %}{{ sub|selectattr('feito')|list|length }}/{{ sub|length }}{% else %}+ checklist{% endif %}
+  </button>
+  {% if t.prazo %}<span class="data">{{ t.prazo|rotulo }}</span>{% endif %}
+  <a class="mais" href="{{ url_for('tasks.edit', task_id=t.id) }}">detalhes</a>
+  <div class="painel">
+    <ul>
+      {% for i in sub %}
+      <li class="subitem{% if i.feito %} feito{% endif %}">
+        <form method="post" action="{{ url_for('tasks.check_item', task_id=t.id, item_id=i.id) }}" class="item-form">
+          <input type="hidden" name="next" value="lista">
+          <input type="hidden" name="feito" value="{{ 0 if i.feito else 1 }}">
+          <input type="checkbox" aria-label="Marcar item" {% if i.feito %}checked{% endif %}>
+        </form>
+        <span class="texto">{{ i.texto }}</span>
+        <form method="post" action="{{ url_for('tasks.delete_item', task_id=t.id, item_id=i.id) }}" class="item-form">
+          <input type="hidden" name="next" value="lista">
+          <button type="submit" class="remover" aria-label="Remover item">remover</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    <form method="post" action="{{ url_for('tasks.add_item', task_id=t.id) }}" class="item-form novo-item">
+      <input type="hidden" name="next" value="lista">
+      <input type="text" name="texto" placeholder="Adicionar item..." required>
+      <button class="button button-small" type="submit">Adicionar</button>
+    </form>
+  </div>
+</li>
+{% endmacro %}
+
+{% block content %}
+<h1>Olá, {{ session.get('user_name') }}</h1>
+<p class="muted">{% if pendentes == 0 %}Nada pendente.{% elif pendentes == 1 %}1 tarefa pendente.{% else %}{{ pendentes }} tarefas pendentes.{% endif %}</p>
+
+<form method="post" action="{{ url_for('tasks.create') }}" class="nova">
+  <input type="text" name="titulo" placeholder="Nova tarefa..." autofocus required>
+  <input type="date" name="prazo" aria-label="Prazo">
+  <span class="atalhos">
+    <button type="button" data-dias="0">Hoje</button>
+    <button type="button" data-dias="1">Amanhã</button>
+  </span>
+  <button class="button" type="submit">Adicionar</button>
+</form>
+
+<form method="get" class="busca">
+  <input type="search" name="q" value="{{ busca }}" placeholder="Buscar">
+  {% if busca %}<a href="{{ url_for('tasks.index') }}">limpar</a>{% endif %}
+</form>
+
+{% set secoes = [('atrasadas', 'Atrasadas'), ('hoje', 'Hoje'), ('proximas', 'Próximas'), ('sem_data', 'Sem data')] %}
+{% for chave, titulo in secoes %}
+  {% if grupos[chave] %}
+  <section class="grupo {{ chave }}">
+    <h2>{{ titulo }}</h2>
+    <ul>{% for t in grupos[chave] %}{{ item(t, itens.get(t.id, [])) }}{% endfor %}</ul>
+  </section>
+  {% endif %}
+{% endfor %}
+
+{% if pendentes == 0 and not grupos.feitas %}
+  <p class="vazio">{% if busca %}Nenhuma tarefa encontrada.{% else %}Nenhuma tarefa ainda.{% endif %}</p>
+{% endif %}
+
+{% if grupos.feitas %}
+<details class="grupo feitas">
+  <summary>Concluídas ({{ grupos.feitas|length }})</summary>
+  <ul>{% for t in grupos.feitas %}{{ item(t, itens.get(t.id, [])) }}{% endfor %}</ul>
+</details>
+{% endif %}
+{% endblock %}

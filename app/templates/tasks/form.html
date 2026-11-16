@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Editar tarefa | Tarefaz{% endblock %}
+{% block content %}
+<section class="form-page">
+  <a class="back" href="{{ url_for('tasks.index') }}">← Voltar</a>
+  <h1>Editar tarefa</h1>
+  <form method="post" class="form task-form">
+    <label>Título
+      <input name="titulo" required value="{{ request.form.get('titulo', task.titulo) }}">
+    </label>
+    <label>Descrição
+      <textarea name="descricao" rows="6" placeholder="Anotações, links, o que for preciso lembrar...">{{ request.form.get('descricao', task.descricao or '') }}</textarea>
+    </label>
+    <label>Prazo
+      <input type="date" name="prazo" value="{{ request.form.get('prazo', task.prazo or '') }}">
+    </label>
+    <span class="atalhos">
+      <button type="button" data-dias="0">Hoje</button>
+      <button type="button" data-dias="1">Amanhã</button>
+    </span>
+    <label class="inline">
+      <input type="checkbox" name="importante" {% if (request.form and 'importante' in request.form) or (not request.form and task.prioridade == 'alta') %}checked{% endif %}>
+      Importante
+    </label>
+    <button class="button" type="submit">Salvar</button>
+  </form>
+  <section id="checklist" class="checklist">
+    {% include 'tasks/_checklist.html' %}
+  </section>
+  <form method="post" action="{{ url_for('tasks.delete', task_id=task.id) }}" data-confirm="Excluir esta tarefa?" class="delete-form">
+    <button type="submit">Excluir</button>
+  </form>
+</section>
+{% endblock %}

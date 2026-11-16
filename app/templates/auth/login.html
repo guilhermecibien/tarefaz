@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Entrar | Tarefaz{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <div class="brand brand-large">Tare<span>faz</span></div>
+  <h1>Entrar</h1>
+  <form method="post" class="form">
+    <label>E-mail
+      <input type="email" name="email" required value="{{ request.form.get('email', '') }}">
+    </label>
+    <label>Senha
+      <input type="password" name="senha" required>
+    </label>
+    <button class="button" type="submit">Entrar</button>
+  </form>
+  <p class="muted">Ainda não possui uma conta? <a href="{{ url_for('auth.register') }}">Cadastre-se</a></p>
+</section>
+{% endblock %}

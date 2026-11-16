@@ -1,0 +1,20 @@
+<h2>Checklist{% if itens %} <small>{{ itens|selectattr('feito')|list|length }}/{{ itens|length }}</small>{% endif %}</h2>
+<ul>
+  {% for i in itens %}
+  <li class="subitem{% if i.feito %} feito{% endif %}">
+    <form method="post" action="{{ url_for('tasks.check_item', task_id=task.id, item_id=i.id) }}" class="item-form">
+      <input type="hidden" name="feito" value="{{ 0 if i.feito else 1 }}">
+      <input type="checkbox" aria-label="Marcar item" {% if i.feito %}checked{% endif %}>
+      <noscript><button type="submit">ok</button></noscript>
+    </form>
+    <span class="texto">{{ i.texto }}</span>
+    <form method="post" action="{{ url_for('tasks.delete_item', task_id=task.id, item_id=i.id) }}" class="item-form">
+      <button type="submit" class="remover" aria-label="Remover item">remover</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+<form method="post" action="{{ url_for('tasks.add_item', task_id=task.id) }}" class="item-form novo-item">
+  <input type="text" name="texto" placeholder="Adicionar item..." required>
+  <button class="button button-small" type="submit">Adicionar</button>
+</form>

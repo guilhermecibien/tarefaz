@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Conta | Tarefaz{% endblock %}
+{% block content %}
+<section class="form-page">
+  <a class="back" href="{{ url_for('tasks.index') }}">← Voltar</a>
+  <h1>Conta</h1>
+
+  <form method="post" class="form task-form">
+    <h2>Dados</h2>
+    <input type="hidden" name="acao" value="dados">
+    <label>Nome
+      <input name="nome" required value="{{ request.form.get('nome', conta.nome) if request.form.get('acao') == 'dados' else conta.nome }}">
+    </label>
+    <label>E-mail
+      <input type="email" name="email" required value="{{ request.form.get('email', conta.email) if request.form.get('acao') == 'dados' else conta.email }}">
+    </label>
+    <label>Senha atual (para confirmar)
+      <input type="password" name="senha_atual" required>
+    </label>
+    <button class="button" type="submit">Salvar dados</button>
+  </form>
+
+  <form method="post" class="form task-form">
+    <h2>Trocar senha</h2>
+    <input type="hidden" name="acao" value="senha">
+    <label>Senha atual
+      <input type="password" name="senha_atual" required>
+    </label>
+    <label>Nova senha <small>(mínimo de 8 caracteres, com letras e números)</small>
+      <input type="password" name="nova_senha" required minlength="8">
+    </label>
+    <label>Repetir nova senha
+      <input type="password" name="confirmar_senha" required>
+    </label>
+    <button class="button" type="submit">Trocar senha</button>
+  </form>
+</section>
+{% endblock %}
