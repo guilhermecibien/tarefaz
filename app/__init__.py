@@ -10,13 +10,16 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY=os.environ.get("SECRET_KEY", "chave-de-desenvolvimento"),
-        DATABASE=os.path.join(app.instance_path, "tarefaz.sqlite"),
+        DATABASE=os.environ.get(
+            "DATABASE", os.path.join(app.instance_path, "tarefaz.sqlite")
+        ),
     )
 
     if test_config:
         app.config.update(test_config)
 
     os.makedirs(app.instance_path, exist_ok=True)
+    os.makedirs(os.path.dirname(app.config["DATABASE"]), exist_ok=True)
     init_database(app)
     app.jinja_env.filters["rotulo"] = rotulo_prazo
 
