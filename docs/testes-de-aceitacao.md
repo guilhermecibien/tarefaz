@@ -58,3 +58,21 @@ A avaliadora sugeriu uma diferenciação visual para tarefas mais urgentes. Apó
 ### Funcionalidades não testadas
 
 Checklist, busca, edição de tarefa, conclusão e reabertura, alteração de tema e gerenciamento de conta. O teste foi direcionado à criação de uma tarefa com prazo.
+
+
+## Avaliador 4
+
+**Nome:** Euder Freitas  
+**Data do teste:** 16/11/2026
+
+### O que testou e funcionou
+
+O avaliador criou uma conta e registrou uma tarefa para lembrar o pagamento da conta de luz. Relatou que o processo foi rápido e que o sistema atende bem à proposta de uma lista simples para o dia a dia. Também testou o tema escuro e avaliou positivamente essa opção.
+
+### O que testou e não funcionou
+
+O avaliador não relatou problemas durante o uso das funcionalidades testadas.
+
+### Funcionalidades não testadas
+
+Edição e exclusão de tarefas, checklist, busca, conclusão e reabertura de tarefas e alteração de dados da conta. O teste foi direcionado ao cadastro, criação de tarefa e tema escuro.
